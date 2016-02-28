@@ -1,0 +1,35 @@
+class WrongNumberOfPlayersError < StandardError ; end
+class NoSuchStrategyError < StandardError ; end
+
+Rules={ "R" => { "R" => "T", "P" => "P", "S" => "R"},
+        "P" => { "R" => "P", "P" => "T", "S" => "S"},
+        "S" => { "R" => "R", "P" => "S", "S" => "T"} }
+def rps_game_winner(game)
+ raise WrongNumberOfPlayersError unless tournament.length == 2
+ raise NoSuchStrategyError unless "PRS".include? game[0][1]
+ raise NoSuchStrategyError unless "PRS".include? game[1][1]
+  
+a=game[0][1]
+b=game[1][1]
+c=game[0][0]
+d=game[1][0]
+if a==b
+  puts [ a , c ]
+end
+e=Rules[a][b]
+ if e == a
+ puts [ c , e ]
+else
+ puts [ d , e ]  
+end
+end
+
+def rps_tournament_winner(tournament)
+  return rps_game_winner(tournament) if tournament[0][1] == String
+  p0 = rps_tournament_winner(tournament[0])
+  p1 = rps_tournament_winner(tournament[1])
+  rps_game_winner([p0, p1])
+end
+
+rps_tournament_winner [[   [ ["Kristen", "P"], ["Dave", "S"] ],  [ ["Richard", "R"], ["Michael", "S"] ],],[  [ ["Allen", "S"], ["Omer", "P"] ],  [ ["David E.", "R"], ["Richard X.", "P"] ]]]
+

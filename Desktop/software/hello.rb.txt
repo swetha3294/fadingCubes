@@ -1,0 +1,5 @@
+def count_words_without_loops(string)
+  res = Hash.new(0)
+  string.downcase.scan(/\w+/).map{|word| res[word] = string.downcase.scan(/\b#{word}\b/).size}
+  return res
+end
